@@ -186,7 +186,7 @@ resource "aws_instance" "chef-server" {
   }
   # Replace local .chef/user.tpl file with generated one
    provisioner "local-exec" {
-     command = "cp -f files/chef/${var.chef_user["username"]}.pem files/chef/user.tpl"
+     command = "cp -f ${path.module}/files/chef/${var.chef_user["username"]}.pem ${path.module}/files/chef/user.tpl"
   }
   # Generate knife.rb
   provisioner "local-exec" {
@@ -228,7 +228,7 @@ resource "null_resource" "chef_chef-server" {
     server_url      = "https://${aws_instance.chef-server.tags.Name}/organizations/${var.chef_org["short"]}"
     skip_install    = true
     user_name       = "${var.chef_user["username"]}"
-    user_key        = "${file("files/chef/user.tpl")}"
+    user_key        = "${file("${path.module}/files/chef/user.tpl")}"
   }
 }
 # Generate pretty output format
