@@ -63,8 +63,8 @@ resource "aws_security_group_rule" "chef-server_allow_egress" {
 }
 # AWS settings
 provider "aws" {
- # access_key = "${var.aws["access_key"]}"
- # secret_key = "${var.aws["secret_key"]}"
+#  access_key = "${var.aws["access_key"]}"
+#  secret_key = "${var.aws["secret_key"]}"
   region     = "${var.aws_region}"
 }
 #
@@ -182,12 +182,14 @@ resource "aws_instance" "chef-server" {
   }
   # Copy back .chef files
   provisioner "local-exec" {
-    command = "scp -r -o stricthostkeychecking=no -i ${var.instance_key["file"]} ${lookup(var.ami_usermap, var.ami_os)}@${self.public_ip}:.chef/* .chef/"
+    command = "scp -r -o stricthostkeychecking=no -i ${var.instance_key["file"]} ${lookup(var.ami_usermap, var.ami_os)}@${self.public_ip}:${path.module}/.chef/* ${path.module}/.chef/"
   }
-  # Replace local .chef/user.tpl file with generated one
-   provisioner "local-exec" {
-     command = "cp -f ${path.module}/files/chef/${var.chef_user["username"]}.pem ${path.module}/files/chef/user.tpl"
+  # Replace local .chef/user.pem file with generated one
+  provisioner "local-exec" {
+    command = "cp -f ${path.module}/.chef/${var.chef_user["username"]}.pem ${path.module}/.chef/user.pem"
   }
+"${file("${path.module}/mgt-user-data.sh")}"
+
   # Generate knife.rb
   provisioner "local-exec" {
     command = <<-EOC
@@ -228,7 +230,7 @@ resource "null_resource" "chef_chef-server" {
     server_url      = "https://${aws_instance.chef-server.tags.Name}/organizations/${var.chef_org["short"]}"
     skip_install    = true
     user_name       = "${var.chef_user["username"]}"
-    user_key        = "${file("${path.module}/files/chef/user.tpl")}"
+    user_key        = "${file("${path.module}/.chef/user.pem")}"
   }
 }
 # Generate pretty output format
