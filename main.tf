@@ -63,8 +63,8 @@ resource "aws_security_group_rule" "chef-server_allow_egress" {
 }
 # AWS settings
 provider "aws" {
-#  access_key = "${var.aws["access_key"]}"
-#  secret_key = "${var.aws["secret_key"]}"
+  access_key = "${var.aws["access_key"]}"
+  secret_key = "${var.aws["secret_key"]}"
   region     = "${var.aws_region}"
 }
 #
@@ -186,9 +186,8 @@ resource "aws_instance" "chef-server" {
   }
   # Replace local .chef/user.pem file with generated one
   provisioner "local-exec" {
-    command = "cp -f .chef/${var.chef_user["username"]}.pem chef/user.pem"
+    command = "cp -f .chef/${var.chef_user["username"]}.pem .chef/user.pem"
   }
-
   # Generate knife.rb
   provisioner "local-exec" {
     command = <<-EOC
@@ -229,7 +228,7 @@ resource "null_resource" "chef_chef-server" {
     server_url      = "https://${aws_instance.chef-server.tags.Name}/organizations/${var.chef_org["short"]}"
     skip_install    = true
     user_name       = "${var.chef_user["username"]}"
-    user_key        = "${file("${path.module}/.chef/user.pem")}"
+    user_key        = "${file(".chef/user.pem")}"
   }
 }
 # Generate pretty output format
