@@ -186,7 +186,7 @@ resource "aws_instance" "chef-server" {
   }
   # Replace local .chef/user.pem file with generated one
   provisioner "local-exec" {
-    command = "cp -f ${path.module}/.chef/${var.chef_user["username"]}.pem ${path.module}/.chef/user.pem"
+    command = "cp -f .chef/${var.chef_user["username"]}.pem chef/user.pem"
   }
 
   # Generate knife.rb
