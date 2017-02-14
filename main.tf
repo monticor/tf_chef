@@ -63,8 +63,6 @@ resource "aws_security_group_rule" "chef-server_allow_egress" {
 }
 # AWS settings
 provider "aws" {
-  access_key = "${var.aws["access_key"]}"
-  secret_key = "${var.aws["secret_key"]}"
   region     = "${var.aws_region}"
 }
 #
@@ -110,7 +108,7 @@ resource "aws_instance" "chef-server" {
   associate_public_ip_address = "${var.instance_public}"
   subnet_id        = "${var.aws_network["subnet"]}"
   vpc_security_group_ids = ["${aws_security_group.chef-server.id}"]
-  key_name         = "${var.instance_key["name"]}"
+  key_name         = "${var.instance_key}"
   tags             = {
     Name           = "${var.instance["hostname"]}.${var.instance["domain"]}"
     Description    = "${var.instance_tag_desc}"

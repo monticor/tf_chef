@@ -2,15 +2,15 @@
 #
 # AWS Settings
 #
-aws = {
-  access_key       = ""
-  secret_key       = ""
-}
+#aws = {
+#  access_key       = ""
+#  secret_key       = ""
+#}
 aws_network        = {
   subnet           = ""
   vpc              = ""
 }
-#aws_region         = "us-west-1"
+aws_region         = "us-east-1"
 #
 # AWS AMI Settings
 #
@@ -20,7 +20,7 @@ aws_network        = {
 #
 # tf_chef_server settings
 #
-#allowed_cidrs      = "0.0.0.0/0"
+allowed_cidrs      = "0.0.0.0/0"
 #chef_addons        = "manage,push-jobs-server,reporting"
 chef_license       = "false"
 #chef_log           = "true"
@@ -32,10 +32,10 @@ chef_ssl           = {
   cert             = ""
   key              = ""
 }
-#chef_user          = {
-#  email            = "chef.admin@domain.tld"
-#  first            = "Chef"
-#  last             = "Admin"
+chef_user          = {
+  email            = "chef.admin@domain.tld"
+  first            = "Chef"
+  last             = "Admin"
 #  username         = "chefadmin"
 #}
 #chef_versions      = {
@@ -48,8 +48,8 @@ chef_ssl           = {
 #}
 #instance_flavor    = "c3.xlarge"
 instance_key       = {
-  file             = ""
-  name             = ""
+  file             = "bg.pem"
+  name             = "bg"
 }
 #instance_public    = ""
 #instance_tag_desc  = ""
