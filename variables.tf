@@ -20,7 +20,7 @@ variable "aws_network" {
 variable "aws_region" {
   type             = "string"
   description      = "AWS Region to deploy to"
-  default          = "us-east-1"
+  default          = "us-west-1"
 }
 #
 # AMI mapping
@@ -176,7 +176,7 @@ variable "instance_public" {
 variable "instance_tag_desc" {
   type             = "string"
   description      = "EC2 instance description tag"
-  default          = "Created using Terraform"
+  default          = "Created using Terraform (tf_chef_server)"
 }
 variable "instance_volume" {
   type             = "map"
