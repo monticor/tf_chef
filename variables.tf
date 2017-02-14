@@ -1,14 +1,14 @@
 #
 # AWS provider specific configs
 #
-#variable "aws" {
-# type             = "map"
-#  description      = "AWS accessibility settings"
- # default          = {
- #   access_key     = ""
-  #  secret_key     = ""
-  #}
-#}
+variable "aws" {
+  type             = "map"
+  description      = "AWS accessibility settings"
+  default          = {
+    access_key     = ""
+    secret_key     = ""
+  }
+}
 variable "aws_network" {
   type             = "map"
   description      = "AWS networking settings"
