@@ -151,8 +151,8 @@ variable "instance" {
   type             = "map"
   description      = "EC2 instance host settings"
   default          = {
-    domain         = "localdomain"
-    hostname       = "localhost"
+    domain         = "cx"
+    hostname       = "chef_server"
   }
 }
 variable "instance_flavor" {
