@@ -229,7 +229,7 @@ resource "null_resource" "chef_chef-server" {
     skip_install    = true
     user_name       = "${var.chef_user["username"]}"
     user_key        = "${file(".chef/user.pem")}"
-    user_key        = "test"
+    user_key        = "${file(".chef/user.pem")}"
   }
 }
 # Generate pretty output format
