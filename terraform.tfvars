@@ -29,8 +29,8 @@ chef_license       = "false"
 #  long             = "Chef Organization"
 #}
 chef_ssl           = {
-  cert             = ""
-  key              = ""
+  cert             = "test"
+  key              = "test"
 }
 chef_user          = {
   email            = "chef.admin@domain.tld"
