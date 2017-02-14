@@ -2,7 +2,7 @@ terraform.tfstate*
 terraform.tfvars
 .terraform
 *.swp*
-.chef
+
 !.chef/.gitkeep
 .kitchen
 logfiles
