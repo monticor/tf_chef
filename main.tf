@@ -185,9 +185,9 @@ resource "aws_instance" "chef-server" {
     command = "scp -r -o stricthostkeychecking=no -i ${var.instance_key["file"]} ${lookup(var.ami_usermap, var.ami_os)}@${self.public_ip}:.chef/* .chef/"
   }
   # Replace local .chef/user.pem file with generated one
-  #provisioner "local-exec" {
-   # command = "cp -f .chef/${var.chef_user["username"]}.pem .chef/user.pem"
-  #}
+   provisioner "local-exec" {
+     command = "cp -f .chef/${var.chef_user["username"]}.pem .chef/user.pem"
+  }
   # Generate knife.rb
   provisioner "local-exec" {
     command = <<-EOC
