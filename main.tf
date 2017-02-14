@@ -188,7 +188,6 @@ resource "aws_instance" "chef-server" {
   provisioner "local-exec" {
     command = "cp -f ${path.module}/.chef/${var.chef_user["username"]}.pem ${path.module}/.chef/user.pem"
   }
-"${file("${path.module}/mgt-user-data.sh")}"
 
   # Generate knife.rb
   provisioner "local-exec" {
