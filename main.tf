@@ -182,7 +182,7 @@ resource "aws_instance" "chef-server" {
   }
   # Copy back .chef files
   provisioner "local-exec" {
-    command = "scp -r -o stricthostkeychecking=no -i ${var.instance_key["file"]} ${lookup(var.ami_usermap, var.ami_os)}@${self.public_ip}:${path.module}/.chef/* ${path.module}/.chef/"
+    command = "scp -r -o stricthostkeychecking=no -i ${var.instance_key["file"]} ${lookup(var.ami_usermap, var.ami_os)}@${self.public_ip}:.chef/* .chef/"
   }
   # Replace local .chef/user.pem file with generated one
   provisioner "local-exec" {
