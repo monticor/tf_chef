@@ -63,8 +63,8 @@ resource "aws_security_group_rule" "chef-server_allow_egress" {
 }
 # AWS settings
 provider "aws" {
-  access_key = "${var.aws["access_key"]}"
-  secret_key = "${var.aws["secret_key"]}"
+#  access_key = "${var.aws["access_key"]}"
+#  secret_key = "${var.aws["secret_key"]}"
   region     = "${var.aws_region}"
 }
 #
